@@ -1115,9 +1115,11 @@ h6:hover .anchor-link {
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;The notebook for this post can be found &lt;a href="https://github.com/pvonglehn/data-science-concepts/blob/master/gradient_descent_from_scratch.ipynb"&gt;here&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Gradient descent is one of the most important and widespread optimization algorithms used in Machine Learning. It can be used to optimize function parameters such as the weights in a neural network or decision boundaries in support vector machine classifiers.&lt;/p&gt;
-&lt;p&gt;The goal of this tutorial is to dive into the gradient descent algorithm by using it to optimize parameters in a very simple model. We will use a univariate linear regression model without offset (i.e. a straight line through origin) to model some data generated from a linear model with gaussian noise.&lt;/p&gt;
-&lt;h2 id="An-overview-of-the-algorithm"&gt;An overview of the algorithm&lt;a class="anchor-link" href="#An-overview-of-the-algorithm"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The goal of gradient descent is to minimize a loss function. This loss function will measure how well the model fits the data, but it could also contain a regularization term to prevent overfitting. There are various choices for loss functions but they are all functions of the model parameters $\theta$, the training set $\{(x_i,y_i), i = 1,2,3...n\}$ and regularization parameters (if used).&lt;/p&gt;
-$$\frac{\partial J(\theta)}{\partial \theta} = 0$$&lt;h3 id="The-gradient-descent-algorithm-pseudocode"&gt;The gradient descent algorithm pseudocode&lt;a class="anchor-link" href="#The-gradient-descent-algorithm-pseudocode"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;blockquote&gt;&lt;ul style="list-style-type:none;"&gt;
+&lt;p&gt;The goal of this tutorial is to dive into the gradient descent algorithm by using it to optimize a single parameter in a very simple model. We will use a univariate linear regression model without offset (i.e. a straight line through origin) to model some data generated from a linear model with gaussian noise. We will find the value of $\theta$ (the slope of the line through the origin) which best fits the data.&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;The model we will try to optimize: $\hat y_i = \theta.x_i$&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="An-overview-of-the-algorithm"&gt;An overview of the algorithm&lt;a class="anchor-link" href="#An-overview-of-the-algorithm"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The goal of gradient descent is to minimize a loss function. This loss function will take into account how well the model fits the data, but it could also contain a regularization term to prevent overfitting. There are various choices for loss functions but they are all functions of the model parameters $\theta$, the training set $\{(x_i,y_i), i = 1,2,3...n\}$ and regularization parameters (if used).&lt;/p&gt;
+$$\frac{\partial J(\theta)}{\partial \theta} = 0$$&lt;h2 id="The-gradient-descent-algorithm-pseudocode"&gt;The gradient descent algorithm pseudocode&lt;a class="anchor-link" href="#The-gradient-descent-algorithm-pseudocode"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;blockquote&gt;&lt;ul style="list-style-type:none;"&gt;
     &lt;li&gt;
         initialize parameters $\theta_{init}$
     &lt;/li&gt;
@@ -1134,7 +1136,8 @@ $$\frac{\partial J(\theta)}{\partial \theta} = 0$$&lt;h3 id="The-gradient-descen
     &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;In practice it is often preferred to use variants of the gradient descent algorithm such as stochastic gradient descent (SGD) and mini-batch gradient descent which have several advantages such as being much more computationally efficient when working with large data sets as the gradient for each data point is not calculated at every step.&lt;/p&gt;
+&lt;p&gt;The parameters first need to be initialized to $\theta_{init}$, either randomly or to some reasonable initial value based on prior knowledge. Then the gradients are calculated and the parameters are updated by moving in the direction of steepest descent (the negative of the gradient) by an amount of the magnitude of the gradient multiplied by the step size $\eta$. The gradient calculation and update steps are repeated until either a maximum number of steps is reached or the algorithm converges. One option for convergence criteria is that the gradient is within some small value $\epsilon$ of zero.&lt;/p&gt;
+&lt;h3 id="Related-algorithms"&gt;Related algorithms&lt;a class="anchor-link" href="#Related-algorithms"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;In practice it is often preferred to use variants of the gradient descent algorithm such as stochastic gradient descent (SGD) and mini-batch gradient descent which have several advantages such as being much more computationally efficient when working with large data sets as the gradient for each data point is not calculated at every step.&lt;/p&gt;
 &lt;h1 id="Our-example"&gt;Our example&lt;a class="anchor-link" href="#Our-example"&gt;&amp;#182;&lt;/a&gt;&lt;/h1&gt;&lt;h2 id="Generate-data"&gt;Generate data&lt;a class="anchor-link" href="#Generate-data"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;First we will generate n data points according to the following formula:&lt;/p&gt;
 &lt;blockquote&gt;&lt;p&gt;$ y_i = \theta.x_i + w_i $&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -1212,7 +1215,7 @@ $w_i$ is a gaussian noise term&lt;/p&gt;
 &lt;blockquote&gt;&lt;p&gt;$\hat y_i = \hat \theta.x_i$&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Our objective is to find the value of $\hat \theta$ that minimizes the loss function.&lt;/p&gt;
-&lt;h3 id="Half-mean-squared-error-loss-function"&gt;Half mean squared error loss function&lt;a class="anchor-link" href="#Half-mean-squared-error-loss-function"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;We will use the half mean squared error loss function with no regularization term. Halving the mean squared error means that when me take the derivate we end up with a simpler functional form.&lt;/p&gt;
+&lt;h3 id="Half-mean-squared-error-loss-function"&gt;Half mean squared error loss function&lt;a class="anchor-link" href="#Half-mean-squared-error-loss-function"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;We will use the half mean squared error loss function with no regularization term. Halving the mean squared error means that when we take the derivate we end up with a simpler functional form.&lt;/p&gt;
 $$J(\theta) = \frac{1}{n}\sum_{i=1}^n \frac{(\hat \theta.x_i - y_i)^2}{2}$$
 &lt;/div&gt;
 &lt;/div&gt;
