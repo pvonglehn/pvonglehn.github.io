@@ -1,5 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Patrick von Glehn</title><link href="https://pvonglehn.github.io/" rel="alternate"></link><link href="https://pvonglehn.github.io%5Cfeeds/all.atom.xml" rel="self"></link><id>https://pvonglehn.github.io/</id><updated>2020-05-12T20:00:00+02:00</updated><subtitle>A Data Science Blog</subtitle><entry><title>Gradient descent from scratch</title><link href="https://pvonglehn.github.io%5Cgradient-descent.html" rel="alternate"></link><published>2020-05-12T20:00:00+02:00</published><updated>2020-05-12T20:00:00+02:00</updated><author><name>Patrick von Glehn</name></author><id>tag:pvonglehn.github.io\gradient-descent.html,2020-05-12:</id><summary type="html">&lt;p&gt;A tutorial on gradient descent with a very simple example&lt;/p&gt;</summary><content type="html">&lt;style type="text/css"&gt;/*!
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Patrick von Glehn</title><link href="https://pvonglehn.github.io/" rel="alternate"></link><link href="https://pvonglehn.github.io%5Cfeeds/all.atom.xml" rel="self"></link><id>https://pvonglehn.github.io/</id><updated>2020-05-19T00:00:00+02:00</updated><subtitle>A Data Science Blog</subtitle><entry><title>La gran belleza literary text analysis</title><link href="https://pvonglehn.github.io%5Cla-gran-belleza.html" rel="alternate"></link><published>2020-05-19T00:00:00+02:00</published><updated>2020-05-19T00:00:00+02:00</updated><author><name>Patrick von Glehn</name></author><id>tag:pvonglehn.github.io\la-gran-belleza.html,2020-05-19:</id><summary type="html">&lt;p&gt;Data visualization for the Spanish language literary magazine La gran belleza.&lt;/p&gt;</summary><content type="html">&lt;h1&gt;&lt;em&gt;La gran belleza&lt;/em&gt; data analysis&lt;/h1&gt;
+&lt;p&gt;Text and network analysis of data from the Spanish language literary magazine &lt;a href="https://www.lagranbelleza.es/"&gt;&lt;em&gt;La gran belleza&lt;/em&gt;&lt;/a&gt;. Graphics used for the purposes of promotion on social media.&lt;/p&gt;
+&lt;h2&gt;Output of project&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Word clouds and bar charts (see below) analysing the vocabulary of the short stories &lt;/li&gt;
+&lt;li&gt;Graph of collaboration network&lt;/li&gt;
+&lt;li&gt;Posted on &lt;a href="https://www.instagram.com/p/B3W1-9WCbjn/?utm_source=ig_embed&amp;amp;utm_campaign"&gt;instagram&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Input&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;300 short stories written in Spanish with a total of 324733 words submitted to the spring 2020 edition of the magazine.&lt;/li&gt;
+&lt;li&gt;List of 160 collaborators and details about which of the 7 magazine issues they worked on.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Tools used:&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;python-docx, odfpy, pywin32 and tika for converting documents to plain text&lt;/li&gt;
+&lt;li&gt;spacy and gensim for natural language processing&lt;/li&gt;
+&lt;li&gt;pandas, matplotlib and wordcloud for plot generation&lt;/li&gt;
+&lt;li&gt;networkx and Gephi for the graph analysis and visualization&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Notes&lt;/h2&gt;
+&lt;p&gt;The full texts have not been included in this repo for copyright reasons.&lt;/p&gt;
+&lt;h1&gt;Collaboration network&lt;/h1&gt;
+&lt;p&gt;&lt;img src="figures/mapa_relacional.svg" /&gt;&lt;/p&gt;
+&lt;h1&gt;Wordclouds&lt;/h1&gt;
+&lt;p&gt;&lt;img src="figures/unigrams_cloud.jpg" /&gt;
+&lt;img src="figures/bigrams_cloud.jpg" /&gt;&lt;/p&gt;
+&lt;h1&gt;Single word and bigram bar charts&lt;/h1&gt;
+&lt;p&gt;&lt;img src="figures/unigrams_bar.jpg"   /&gt;
+&lt;img src="figures/bigrams_bar.jpg" /&gt;&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>Gradient descent from scratch</title><link href="https://pvonglehn.github.io%5Cgradient-descent.html" rel="alternate"></link><published>2020-05-12T20:00:00+02:00</published><updated>2020-05-12T20:00:00+02:00</updated><author><name>Patrick von Glehn</name></author><id>tag:pvonglehn.github.io\gradient-descent.html,2020-05-12:</id><summary type="html">&lt;p&gt;A tutorial on gradient descent with a very simple example&lt;/p&gt;</summary><content type="html">&lt;style type="text/css"&gt;/*!
 *
 * IPython notebook
 *
