@@ -1129,7 +1129,7 @@ h6:hover .anchor-link {
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h1 id="Getting-the-data"&gt;Getting the data&lt;a class="anchor-link" href="#Getting-the-data"&gt;&amp;#182;&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;The data for this study was downloaded from the Smithsonian Institution National Museum of Natural History Global Volcanism Program &lt;a href="https://volcano.si.edu/"&gt;database&lt;/a&gt;. The data is downloadable in the form of an excel spreadsheet from their website. You can download the reduced data set from my github repo &lt;a href=""&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id="Getting-the-data"&gt;Getting the data&lt;a class="anchor-link" href="#Getting-the-data"&gt;&amp;#182;&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;The data for this study was downloaded from the Smithsonian Institution National Museum of Natural History Global Volcanism Program &lt;a href="https://volcano.si.edu/"&gt;database&lt;/a&gt;. The data is downloadable in the form of an excel spreadsheet from their website. You can download the reduced data set from my github repo &lt;a href="https://github.com/pvonglehn/data-science-concepts/blob/master/data/volcanos.csv"&gt;here&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Here I have included all confirmed volcanic eruptions between 1950 and 2019 and am treating the start date as the date of occurence.&lt;/p&gt;
 
 &lt;/div&gt;
