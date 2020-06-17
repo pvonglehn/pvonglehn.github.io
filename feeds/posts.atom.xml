@@ -1119,9 +1119,9 @@ h6:hover .anchor-link {
 &lt;p&gt;The app is highly addictive because cards build up in a backlog which you need to try to clear every day. If you don't you have double the work to do the next day... or triple if you leave it three days. If I neglect my cards during a particularly busy week this can result in grueling sessions of several hours over the weekend.&lt;/p&gt;
 &lt;p&gt;Below is an example anki card, first the question display and below the question and answer display.&lt;/p&gt;
 &lt;p&gt;When you see the question you say the answer out loud, or on the mobile app there is an option to write the answer on a scratch pad. You then reveal the answer and tell Anki if you got the question wrong or got it right and it was hard, good or easy. If you got it wrong it will come back within the same study session, otherwise it will come back at a later date, in this case in 2, 3 or 4 days depending on how easy you found it. If you also answer correctly for a particular card the next time you see it, the interval of time until you see it again will be even longer (probably around a week in this case).&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://pvonglehn.github.io/figures/joint_pdf_front.PNG" alt="anki card front"&gt;
+&lt;p&gt;&lt;img src="https://pvonglehn.github.io/figures/joint_pdf_front.PNG" alt="anki card front"&gt;&lt;br&gt;
 Example Anki card (question)&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://pvonglehn.github.io/figures/joint_pdf_back.PNG" alt="anki card back"&gt;
+&lt;p&gt;&lt;img src="https://pvonglehn.github.io/figures/joint_pdf_back.PNG" alt="anki card back"&gt;&lt;br&gt;
 Example Anki card (answer)&lt;/p&gt;
 &lt;h1 id="My-Anki-usage-over-time"&gt;My Anki usage over time&lt;a class="anchor-link" href="#My-Anki-usage-over-time"&gt;&amp;#182;&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;Depending on the period of my life (if I'm learning a new language or taking a course) my usage increases or decreases, so I thought it would be interesting to see how my usage has evolved over time and during which periods I used it the most.&lt;/p&gt;
 &lt;p&gt;I first really got into Anki when cramming vocabulary for my German C1 exam when I was living in Berlin. After an intensive winter studying I seem to have given myself a spring and summer off from studying while I was working as a tour guide around Europe.&lt;/p&gt;
