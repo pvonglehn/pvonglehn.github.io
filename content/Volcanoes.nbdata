@@ -1,0 +1,7 @@
+Title: Modelling volcanic eruptions as Poisson processes 
+Slug: volcanos-poisson                       
+Date: 2020-05-20         
+Category: posts
+Tags: statistics, Poisson
+author: Patrick von Glehn
+Summary: Modelling all volcanic eruptions on Earth between 1950 and 2019 as a Poisson process. Estimate the arrival rate from interrarival times and number of eruptions per year.

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Patrick von Glehn - misc</title><link href="https://pvonglehn.github.io/" rel="alternate"></link><link href="https://pvonglehn.github.io%5Cfeeds/misc.atom.xml" rel="self"></link><id>https://pvonglehn.github.io/</id><updated>2020-05-19T00:00:00+02:00</updated><subtitle>A Data Science Blog</subtitle><entry><title>La gran belleza literary text analysis</title><link href="https://pvonglehn.github.io%5Cla-gran-belleza.html" rel="alternate"></link><published>2020-05-19T00:00:00+02:00</published><updated>2020-05-19T00:00:00+02:00</updated><author><name>Patrick von Glehn</name></author><id>tag:pvonglehn.github.io\la-gran-belleza.html,2020-05-19:</id><summary type="html">&lt;p&gt;Data visualization for the Spanish language literary magazine La gran belleza.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Full code for this project can be found &lt;a href="https://github.com/pvonglehn/la-gran-belleza-text-analysis"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Text and network analysis of data from the Spanish language literary magazine &lt;a href="https://www.lagranbelleza.es/"&gt;&lt;em&gt;La gran belleza&lt;/em&gt;&lt;/a&gt;. Graphics used for the purposes of promotion on social media.&lt;/p&gt;
+&lt;h2&gt;Output of project&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Word clouds and bar charts (see below) analysing the vocabulary of the short stories. See: &lt;a href="https://www.instagram.com/p/B_112ofqppQ/"&gt;instagram post&lt;/a&gt; &lt;/li&gt;
+&lt;li&gt;Graph of collaboration network. See: &lt;a href="https://www.instagram.com/p/B3W1-9WCbjn/?utm_source=ig_embed&amp;amp;utm_campaign"&gt;instagram post&lt;/a&gt; &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Input&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;300 short stories written in Spanish with a total of 324733 words submitted to the spring 2020 edition of the magazine.&lt;/li&gt;
+&lt;li&gt;List of 160 collaborators and details about which of the 7 magazine issues they worked on.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Tools used:&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;python-docx, odfpy, pywin32 and tika for converting documents to plain text&lt;/li&gt;
+&lt;li&gt;spacy and gensim for natural language processing&lt;/li&gt;
+&lt;li&gt;pandas, matplotlib and wordcloud for plot generation&lt;/li&gt;
+&lt;li&gt;networkx and Gephi for the graph analysis and visualization&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Notes&lt;/h2&gt;
+&lt;p&gt;The full texts have not been included in this repo for copyright reasons.&lt;/p&gt;
+&lt;h1&gt;Collaboration network&lt;/h1&gt;
+&lt;p&gt;This collaboration network represents the 160 collaborators (authors, illustrators, editors, musicians etc.) who collaborated in the first 7 editions and/or launch parties of the &lt;em&gt;La gran belleza&lt;/em&gt;. The edges connect the names of the editions with names of people. The names clustered in the middle collaborated on more than one edition.  &lt;/p&gt;
+&lt;p&gt;The graph was generated using networkX and then visualized using Gephi.
+&lt;img alt="mapa relacional" src="https://pvonglehn.github.io/figures/mapa_relacional.svg"&gt;&lt;/p&gt;
+&lt;h1&gt;Wordclouds&lt;/h1&gt;
+&lt;p&gt;These wordclouds are made up of the most common words occurring in the 300 short stories submitted to the spring edition of of &lt;em&gt;La gran Belleza&lt;/em&gt;, whose theme was 'vecinos' - neighbours. The text was processed by tokenizing and lemmatizing using spaCy and generating bigrams using gensim.
+&lt;img alt="unigrams wordcloud" src="https://pvonglehn.github.io/figures/unigrams_cloud.jpg"&gt;
+&lt;img alt="bigrams wordcloud" src="https://pvonglehn.github.io/figures/bigrams_cloud.jpg"&gt;&lt;/p&gt;
+&lt;h1&gt;Single word and bigram bar charts&lt;/h1&gt;
+&lt;p&gt;Bar chart representations of the same data represented in the wordclouds above.
+&lt;img alt="unigrams bar chart" src="https://pvonglehn.github.io/figures/unigrams_bar.jpg"&gt;
+&lt;img alt="bigrams bar chart" src="https://pvonglehn.github.io/figures/bigrams_bar.jpg"&gt;&lt;/p&gt;</content><category term="misc"></category><category term="wordclouds"></category><category term="social media"></category><category term="visualization"></category></entry></feed>
