@@ -1,8 +1,0 @@
-Markdown
-pelican
-jupyter>=1.0
-ipython>=4.0
-nbconvert>=4.0
-beautifulsoup4
-ghp-import
-matplotlib

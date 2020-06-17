@@ -1,7 +1,0 @@
-Title: Failure of neural networks out of training bounds 
-Slug: neural nets out of training bounds     
-Date: 2020-05-12         
-Category: posts
-Tags: 
-author: Patrick von Glehn
-Summary: Illustration of the poor performance of feed forward neural networks when used on input outside of the bounds of the training input.
