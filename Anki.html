@@ -23,22 +23,24 @@
 
 
 <meta name="author" content="Patrick von Glehn" />
-<meta name="description" content="Simple example of Bayes&#39;s theorem" />
-<meta name="keywords" content="">
+<meta name="description" content="How to extract data from Anki flashcards for analysis in python" />
+<meta name="keywords" content="data analysis, SQLite">
 
 <meta property="og:site_name" content="Patrick von Glehn"/>
-<meta property="og:title" content="Bayes and the worried parents"/>
-<meta property="og:description" content="Simple example of Bayes&#39;s theorem"/>
+<meta property="og:title" content="Analysis of Anki flashcards usage"/>
+<meta property="og:description" content="How to extract data from Anki flashcards for analysis in python"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="./Bayes.html"/>
+<meta property="og:url" content="./Anki.html"/>
 <meta property="og:type" content="article"/>
-<meta property="article:published_time" content="2020-05-11 00:00:00+02:00"/>
+<meta property="article:published_time" content="2020-06-17 20:00:00+02:00"/>
 <meta property="article:modified_time" content=""/>
 <meta property="article:author" content="./author/patrick-von-glehn.html">
 <meta property="article:section" content="posts"/>
+<meta property="article:tag" content="data analysis"/>
+<meta property="article:tag" content="SQLite"/>
 <meta property="og:image" content="https://avatars1.githubusercontent.com/u/42738386?s=460&u=c9aa8b78019cbd51a097484639149f307bf7e108&v=4">
 
-  <title>Patrick von Glehn &ndash; Bayes and the worried parents</title>
+  <title>Patrick von Glehn &ndash; Analysis of Anki flashcards usage</title>
 
 </head>
 <body>
@@ -84,9 +86,9 @@
 <article class="single">
   <header>
       
-    <h1 id="Bayes">Bayes and the worried parents</h1>
+    <h1 id="Anki">Analysis of Anki flashcards usage</h1>
     <p>
-          Posted on Mon 11 May 2020 in <a href="./category/posts.html">posts</a>
+          Posted on Wed 17 June 2020 in <a href="./category/posts.html">posts</a>
 
 
     </p>
@@ -1208,24 +1210,25 @@ h6:hover .anchor-link {
  .highlight pre  .il { color: #666666 } /* Literal.Number.Integer.Long */</style><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Bayes-and-the-worried-parents">Bayes and the worried parents<a class="anchor-link" href="#Bayes-and-the-worried-parents">&#182;</a></h1><h3 id="A-simple-(morbid)-example-of-how-to-use-Bayes'-theorem-to-update-beliefs-in-light-of-new-data.">A simple (morbid) example of how to use Bayes' theorem to update beliefs in light of new data.<a class="anchor-link" href="#A-simple-(morbid)-example-of-how-to-use-Bayes'-theorem-to-update-beliefs-in-light-of-new-data.">&#182;</a></h3><p>Notebook author: Patrick von Glehn</p>
-<p>Example adapted from one given by a listener on the BBC 4 radio program More or Less.</p>
-<h2 id="The-scenario">The scenario<a class="anchor-link" href="#The-scenario">&#182;</a></h2><p>Every Sunday I go to my parents' house for dinner. After a lovely evening we say goodbye, I get in my car and travel 10 miles home. My parents always insist that I call them as soon as I get home and as I'm a good boy I almost always call, but occasionally, maybe twice a year, I forget. Last time this happened my parents phoned me after they couldn't bare waiting anymore and gave me an earful, saying that I had them worried sick that I'd had a terrible accident and died.</p>
-<p>I tell them that the reverend Bayes says there was never any need to worry...</p>
-<p>Bayesian statistics can be used to update our beliefs in light of new data. Let's see how my parents should have rationally updated their beliefs about my vital status given that I hadn't called after driving home from our Sunday dinner.</p>
-<h3 id="Spoiler:-with-probability-99.99995%-I-was-fine-and-just-forgot-to-call">Spoiler: with probability 99.99995% I was fine and just forgot to call<a class="anchor-link" href="#Spoiler:-with-probability-99.99995%-I-was-fine-and-just-forgot-to-call">&#182;</a></h3><h2 id="Bayes'-theorem">Bayes' theorem<a class="anchor-link" href="#Bayes'-theorem">&#182;</a></h2><p>Using Bayes' theorem we can calculate, P(A|B): the probability of event A happening given event B has happened if we know (or can estimate) the following:</p>
-<ul>
-<li>P(A): the probability of event A happening under any circumstances (before seeing the data)</li>
-<li>P(B|A): the probability of event B happening given event A has happened</li>
-<li>P(B): the probability of event B happening under any circumstances<blockquote>$P(A|B) = \frac{P(A)P(B|A)}{P(B)} $ </blockquote></li>
-</ul>
-<p>In our case we want to calculate P(A|B): the probability that I had a fatal car accident given that I didn't call my parents after leaving their house. To do the calculation we need:</p>
-<ul>
-<li>P(A): the probability of having a fatal car accident in a 10 mile stretch</li>
-<li>P(B|A): the probability that I don't call given that I have had a fatal car accident (certain)</li>
-<li>P(B): the probability that I don't call, either because I forgot or because I'm dead</li>
-</ul>
-<p>Source for data: Department for Transport, Reported road casualties in Great Britain 2018 annual <a href="https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/834585/reported-road-casualties-annual-report-2018.pdf">report</a></p>
+<p>In this post I'll briefly introduce Anki flashcards, show an analysis of my usage over time and give instructions and example python code for how to extract data from Anki's SQLite database and load it into pandas.</p>
+<h1 id="An-introduction-to-Anki">An introduction to Anki<a class="anchor-link" href="#An-introduction-to-Anki">&#182;</a></h1><p>About four years ago I discovered spaced repetition learning and the flashcard app <a href="https://apps.ankiweb.net/">Anki</a>. It is not an exaggeration to say that it has revolutionised the way I study.</p>
+<p>If you are not aware of spaced repetition learning I highly recommend you <a href="https://en.wikipedia.org/wiki/Spaced_repetition">check it out</a>. The basic premise is that you format material that you want to learn into flashcards with short questions on one side and short answers on the other side. Anki then tests you on the cards you have made. Questions which you repeatedly get wrong keep returning with high frequency, while questions that you repeatedly get right return less and less frequently.</p>
+<p>The app is highly addictive because cards build up in a backlog which you need to try to clear every day. If you don't you have double the work to do the next day... or triple if you leave it three days. If I neglect my cards during a particularly busy week this can result in grueling sessions of several hours over the weekend.</p>
+<p>Below is an example anki card, first the question display and below the question and answer display.</p>
+<p>When you see the question you say the answer out loud, or on the mobile app there is an option to write the answer on a scratch pad. You then reveal the answer and tell Anki if you got the question wrong or got it right and it was hard, good or easy. If you got it wrong it will come back within the same study session, otherwise it will come back at a later date, in this case in 2, 3 or 4 days depending on how easy you found it. If you also answer correctly for a particular card the next time you see it, the interval of time until you see it again will be even longer (probably around a week in this case).</p>
+<p><img src="./figures/joint_pdf_front.PNG" alt="anki card front"></p>
+<p style="text-align:center;">Example Anki card (question)</p>
+<br>
+<br>
+
+![anki card back]({attach}figures/joint_pdf_back.PNG)
+<p style="text-align:center;">Example Anki card (answer)</p><h1 id="My-Anki-usage-over-time">My Anki usage over time<a class="anchor-link" href="#My-Anki-usage-over-time">&#182;</a></h1><p>Depending on the period of my life (if I'm learning a new language or taking a course) my usage increases or decreases, so I thought it would be intersting to see how my usage has evolved over time and during which periods I used it the most.</p>
+<p>I first really got into Anki when cramming vocabulary for my German C1 exam when I was living in Berlin. After an intestive winter studying I seem to have given myself a spring and summer off from studying while I was working as a tour guide around Europe.</p>
+<p>I then moved to Spain and relied heavily on Anki to cram new vocabulary, which I learnt in order of frequency from lists such as that compiled by <a href="https://blog.fluent-forever.com/base-vocabulary-list/">Gabriel Wyner</a> and the <a href="https://www.routledge.com/A-Frequency-Dictionary-of-Spanish-Core-Vocabulary-for-Learners/Davies-Davies/p/book/9781138686540">Routledge</a> frequency dictionary of Spanish.</p>
+<p>In the second half of 2018 I decided to retrain as a data scientist and studies with flashcards intensively for example to learn the basics of probability as shown in the examples above. I then kept up a fairly steady usage with a small increase when studying for my Spanish C1 and another surge recently because I'm taking the excellent Statistics and Data Science <a href="https://www.edx.org/micromasters/mitx-statistics-and-data-science">Micromasters</a> course with MITx on edX.</p>
+<p><img src="./figures/anki_history.jpg" alt="histogram"></p>
+<h1 id="How-to-load-data-from-Anki-into-python">How to load data from Anki into python<a class="anchor-link" href="#How-to-load-data-from-Anki-into-python">&#182;</a></h1><p>The data from Anki decks are stored in an SQLite database. On the Anki desktop application choose the deck you want to analyse, then select settings -&gt; export. The deck will be saved as a .apkg file, which is just a zip file. If you unzip this you will end up with a media folder, which we won't use and a file called collection.anki2, which is the SQLite file we want to access.</p>
+<p>The code below shows you how to set up a connection to the sqlite database with the sqlite3 package, extract the review data to a pandas dataframe, format and aggregate the data and finally plot a histogram of monthly time spent reviewing.</p>
 
 </div>
 </div>
@@ -1235,114 +1238,78 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># P(A): calculate the chance of dying in a 10 mile stretch from data about UK road fatalities</span>
-<span class="n">UK_fatalities_per_billion_miles_car</span> <span class="o">=</span> <span class="mf">1.8</span>
-<span class="n">P_dying_in_10_miles_car</span> <span class="o">=</span> <span class="n">UK_fatalities_per_billion_miles_car</span> <span class="o">/</span> <span class="mf">10.0</span><span class="o">**</span><span class="mi">8</span> 
-<span class="n">P_not_dying_in_10_miles_car</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">P_dying_in_10_miles_car</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">sqlite3</span>
+<span class="kn">from</span> <span class="nn">matplotlib.dates</span> <span class="kn">import</span> <span class="n">DateFormatter</span>
+<span class="kn">from</span> <span class="nn">pandas.plotting</span> <span class="kn">import</span> <span class="n">register_matplotlib_converters</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rcParams</span>
+<span class="kn">import</span> <span class="nn">matplotlib.dates</span> <span class="k">as</span> <span class="nn">mdates</span>
 
-<span class="c1"># P(B|A): I definitely won&#39;t call if I&#39;m dead</span>
-<span class="n">P_doesnt_call_if_dead</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="c1"># set up sqlite connection</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;collection.anki2&quot;</span><span class="p">)</span>
 
-<span class="c1"># P(B): I forget to call about twice a year (52 weeks)</span>
-<span class="c1"># The probability that I don&#39;t call under any circumstances =</span>
-<span class="c1"># The probability that I arrive safely and then don&#39;t call + the probability that I die and then don&#39;t call</span>
+<span class="c1"># matplotlib settings</span>
+<span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Verdana&#39;</span>
+<span class="n">register_matplotlib_converters</span><span class="p">()</span>
 
-<span class="n">P_doesnt_call_if_not_dead</span> <span class="o">=</span> <span class="mi">2</span><span class="o">/</span><span class="mi">52</span>
-<span class="n">P_doesnt_call</span> <span class="o">=</span> <span class="p">(</span><span class="n">P_not_dying_in_10_miles_car</span> <span class="o">*</span> <span class="n">P_doesnt_call_if_not_dead</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">P_dying_in_10_miles_car</span> <span class="o">*</span> <span class="n">P_doesnt_call_if_dead</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">extract_monthly_review_data</span><span class="p">(</span><span class="n">conn</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;extract aggregate monthly review data from anki deck&#39;&#39;&#39;</span>
+    
+    <span class="c1"># select review data from anki deck</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s2">&quot;SELECT * from revlog;&quot;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
 
-<span class="c1"># Now let&#39;s calculate the final answer...</span>
-<span class="n">P_dead_if_doesnt_call</span> <span class="o">=</span> <span class="p">(</span><span class="n">P_dying_in_10_miles_car</span> <span class="o">*</span> <span class="n">P_doesnt_call_if_dead</span><span class="p">)</span> <span class="o">/</span> <span class="n">P_doesnt_call</span>
+    <span class="c1"># convert anki id which corresponds to time in milliseconds (10^-6s) since epoch </span>
+    <span class="c1"># to nanoseconds (10^-9s) since epoch then convert to pandas datetime</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;dt&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">)</span>
 
-<span class="n">chance_per_million</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">P_dead_if_doesnt_call</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">)</span>
+    <span class="c1"># group by year and month</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;year-month&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;dt&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span>  <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;dt&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+    <span class="n">agg_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;year-month&quot;</span><span class="p">)[[</span><span class="s2">&quot;time&quot;</span><span class="p">,</span><span class="s2">&quot;id&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s2">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;count&quot;</span><span class="p">,</span><span class="s2">&quot;time&quot;</span><span class="p">:</span><span class="s2">&quot;sum&quot;</span><span class="p">})</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Probability I&#39;m dead given that I haven&#39;t called = </span><span class="si">{</span><span class="n">P_dead_if_doesnt_call</span> <span class="o">*</span> <span class="mi">100</span> <span class="si">:</span><span class="s2">.7f</span><span class="si">}</span><span class="s2">% or one in </span><span class="si">{</span><span class="n">chance_per_million</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> million  &quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Probability I&#39;m fine and just forgot to call = </span><span class="si">{</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">P_dead_if_doesnt_call</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+    <span class="c1"># convert cumulative time taken per card in milliseconds to hours</span>
+    <span class="n">agg_df</span><span class="p">[</span><span class="s2">&quot;hours&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">agg_df</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span><span class="o">/</span><span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
+    <span class="n">agg_df</span><span class="p">[</span><span class="s2">&quot;dt&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">agg_df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+    <span class="n">agg_df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">agg_df</span><span class="o">.</span><span class="n">dt</span>
+
+    <span class="k">return</span> <span class="n">agg_df</span>
+
+
+<span class="k">def</span> <span class="nf">plot_histogram</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;plot histogram of anki card usage over time&#39;&#39;&#39;</span>
+    
+    <span class="n">fig</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;hours&quot;</span><span class="p">],</span><span class="mi">22</span><span class="p">,</span><span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+
+    <span class="c1"># change tick widths</span>
+    <span class="k">for</span> <span class="n">tick</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_xticklabels</span><span class="p">():</span>
+        <span class="n">tick</span><span class="o">.</span><span class="n">set_rotation</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_tick_params</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_tick_params</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="c1"># Set x tick format</span>
+    <span class="n">date_form</span> <span class="o">=</span> <span class="n">DateFormatter</span><span class="p">(</span><span class="s2">&quot;%Y&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">date_form</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">mdates</span><span class="o">.</span><span class="n">YearLocator</span><span class="p">())</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+    
+    <span class="c1"># Labels</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;time spent reviewing flashcards&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">35</span><span class="p">,</span><span class="n">pad</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;hours study per month&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">labelpad</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">40</span><span class="p">)</span>
+    
+    <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;review_history.png&quot;</span><span class="p">)</span>
+    
+<span class="n">df</span> <span class="o">=</span> <span class="n">extract_monthly_review_data</span><span class="p">(</span><span class="n">conn</span><span class="p">)</span>
+<span class="n">plot_histogram</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Probability I&#39;m dead given that I haven&#39;t called = 0.0000468% or one in 2.1 million  
-Probability I&#39;m fine and just forgot to call = 99.99995320002107%
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="What-about-if-I-ride-a-motorbike-instead-of-a-car?">What about if I ride a motorbike instead of a car?<a class="anchor-link" href="#What-about-if-I-ride-a-motorbike-instead-of-a-car?">&#182;</a></h1>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">UK_fatalities_per_billion_miles_motorbike</span> <span class="o">=</span> <span class="mf">119.7</span>
-<span class="n">P_dying_in_10_miles_motorbike</span> <span class="o">=</span> <span class="n">UK_fatalities_per_billion_miles_motorbike</span> <span class="o">/</span> <span class="mf">10.0</span><span class="o">**</span><span class="mi">8</span> 
-<span class="n">P_not_dying_in_10_miles_motorbike</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">P_dying_in_10_miles_motorbike</span>
-
-<span class="n">P_doesnt_call_if_dead</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">P_doesnt_call_if_not_dead</span> <span class="o">=</span> <span class="mi">2</span><span class="o">/</span><span class="mi">52</span>
-<span class="n">P_doesnt_call</span> <span class="o">=</span> <span class="p">((</span><span class="n">P_not_dying_in_10_miles_motorbike</span> <span class="o">*</span> <span class="n">P_doesnt_call_if_not_dead</span><span class="p">)</span> 
-                   <span class="o">+</span> <span class="p">(</span><span class="n">P_dying_in_10_miles_motorbike</span> <span class="o">*</span> <span class="n">P_doesnt_call_if_dead</span><span class="p">))</span>
-
-<span class="n">P_dead_if_doesnt_call</span> <span class="o">=</span> <span class="p">(</span><span class="n">P_dying_in_10_miles_motorbike</span> <span class="o">*</span> <span class="n">P_doesnt_call_if_dead</span><span class="p">)</span> <span class="o">/</span> <span class="n">P_doesnt_call</span>
-
-<span class="n">chance_per_thousand</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">P_dead_if_doesnt_call</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Probability I&#39;m dead given that I haven&#39;t called = </span><span class="si">{</span><span class="n">P_dead_if_doesnt_call</span> <span class="o">*</span> <span class="mi">100</span> <span class="si">:</span><span class="s2">.7f</span><span class="si">}</span><span class="s2">% or one in </span><span class="si">{</span><span class="n">chance_per_thousand</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> thousand  &quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Probability I&#39;m fine and just forgot to call = </span><span class="si">{</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">P_dead_if_doesnt_call</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Probability I&#39;m dead given that I haven&#39;t called = 0.0031121% or one in 32.1 thousand  
-Probability I&#39;m fine and just forgot to call = 99.9968878931298%
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Conclusion:">Conclusion:<a class="anchor-link" href="#Conclusion:">&#182;</a></h1><p>If I don't call, don't worry I almost certainly just forgot. Although if I ride a motorbike regularly I am very significantly increasing my risk of having a fatal accident over the course of my life.</p>
-
-</div>
-</div>
 </div>
  
 
@@ -1379,6 +1346,8 @@ Probability I&#39;m fine and just forgot to call = 99.9968878931298%
   </div>
   <div class="tag-cloud">
     <p>
+      <a href="./tag/data-analysis.html">data analysis</a>
+      <a href="./tag/sqlite.html">SQLite</a>
     </p>
   </div>
 
