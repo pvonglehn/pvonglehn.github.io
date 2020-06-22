@@ -1243,7 +1243,7 @@ Example Anki card (answer)&lt;/p&gt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</content><category term="posts"></category><category term="data analysis"></category><category term="SQLite"></category></entry><entry><title>Modelling volcanic eruptions as Poisson processes</title><link href="https://pvonglehn.github.io%5Cvolcanos-poisson.html" rel="alternate"></link><published>2020-05-20T00:00:00+02:00</published><updated>2020-05-20T00:00:00+02:00</updated><author><name>Patrick von Glehn</name></author><id>tag:pvonglehn.github.io\volcanos-poisson.html,2020-05-20:</id><summary type="html">&lt;p&gt;Modelling all volcanic eruptions on Earth between 1950 and 2019 as a Poisson process. Estimate the arrival rate from interrarival times and number of eruptions per year.&lt;/p&gt;</summary><content type="html">&lt;style type="text/css"&gt;/*!
+</content><category term="posts"></category><category term="data analysis"></category><category term="SQLite"></category></entry><entry><title>Modelling volcanic eruptions as Poisson processes</title><link href="https://pvonglehn.github.io%5Cvolcanoes-poisson.html" rel="alternate"></link><published>2020-05-20T00:00:00+02:00</published><updated>2020-05-20T00:00:00+02:00</updated><author><name>Patrick von Glehn</name></author><id>tag:pvonglehn.github.io\volcanoes-poisson.html,2020-05-20:</id><summary type="html">&lt;p&gt;Modelling all volcanic eruptions on Earth between 1950 and 2019 as a Poisson process. Estimate the arrival rate from interrarival times and number of eruptions per year.&lt;/p&gt;</summary><content type="html">&lt;style type="text/css"&gt;/*!
 *
 * IPython notebook
 *
