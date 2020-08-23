@@ -1257,7 +1257,7 @@ Example Anki card (answer)</p>
     <span class="c1"># select review data from anki deck</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s2">&quot;SELECT * from revlog;&quot;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
 
-    <span class="c1"># convert anki id which corresponds to time in milliseconds (10^-6s) since epoch </span>
+    <span class="c1"># convert anki id which corresponds to time in milliseconds (10^-3s) since epoch </span>
     <span class="c1"># to nanoseconds (10^-9s) since epoch then convert to pandas datetime</span>
     <span class="n">df</span><span class="p">[</span><span class="s2">&quot;dt&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">)</span>
 
